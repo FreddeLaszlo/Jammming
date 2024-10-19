@@ -1,4 +1,7 @@
-# Getting Started with Create React App
+# React JS App - Create Spotify Playlist
+
+A React JS demonstrating how to:
+ 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

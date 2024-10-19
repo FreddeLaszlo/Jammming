@@ -1,0 +1,11 @@
+#background {
+    overflow: hidden;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    right: 0;
+   
+    z-index: -100;
+}
+
