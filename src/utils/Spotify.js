@@ -11,7 +11,7 @@ import top20 from './top20';  // For demo if no client ID
 
 //////////////////////// REPLACE WITH YOUR APP DETAILS //////////////////////////
 
-//const clientId = '7b5dc28b44d74d629bea6b8673382aaf'; // your clientId
+
 const clientId = ''; // your clientId
 const redirectUrl = 'http://localhost:3000/';        // your redirect URL - must be localhost URL and/or HTTPS
 
