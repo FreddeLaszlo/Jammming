@@ -27,7 +27,7 @@ function Tracklist({playList, onRemoveTrack}) {
     return (
         <div className='tracklist'>
             {playList.map((track, index) => (
-                <Track track={track} playList={playList} index={index} onRemoveTrack={onRemoveTrack} key={makeKey()}/>
+                <Track track={track} playList={playList} index={index} onRemoveTrack={onRemoveTrack} key={makeKey(index)}/>
             ))}
             
         </div>

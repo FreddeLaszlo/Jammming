@@ -8,11 +8,10 @@
  * 15-OCT-2024 
 */
 import top20 from './top20';  // For demo if no client ID
-import './Demo.css';
-
 
 //////////////////////// REPLACE WITH YOUR APP DETAILS //////////////////////////
 
+//const clientId = '7b5dc28b44d74d629bea6b8673382aaf'; // your clientId
 const clientId = ''; // your clientId
 const redirectUrl = 'http://localhost:3000/';        // your redirect URL - must be localhost URL and/or HTTPS
 
@@ -71,29 +70,34 @@ const currentToken = {
 
 // Attempts to get access token from spotify using PKCE authentication
 // If client id is empty, authentication does not occur.
-if (!isDemo) {
-    // On page load, try to fetch auth code from current browser search URL
-    const args = new URLSearchParams(window.location.search);
-    const code = args.get('code');
+async function authenticate() {
+    if (!isDemo) {
+        // On page load, try to fetch auth code from current browser search URL
+        const args = new URLSearchParams(window.location.search);
+        const code = args.get('code');
 
-    // If we find a code, we're in a callback, do a token exchange
-    if (code) {
-        const token = await getToken(code);
-        currentToken.save(token);
+        // If we find a code, we're in a callback, do a token exchange
+        if (code) {
+            const token = await getToken(code);
+            currentToken.save(token);
 
-        // Remove code from URL so we can refresh correctly.
-        const url = new URL(window.location.href);
-        url.searchParams.delete("code");
+            // Remove code from URL so we can refresh correctly.
+            const url = new URL(window.location.href);
+            url.searchParams.delete("code");
 
-        const updatedUrl = url.search ? url.href : url.href.replace('?', '');
-        window.history.replaceState({}, document.title, updatedUrl);
-    }
+            const updatedUrl = url.search ? url.href : url.href.replace('?', '');
+            window.history.replaceState({}, document.title, updatedUrl);
+        }
 
-    // Get a token if we don't already have one.
-    if (!currentToken.access_token) {
-        await redirectToSpotifyAuthorize();
+        // Get a token if we don't already have one.
+        if (!currentToken.access_token) {
+            await redirectToSpotifyAuthorize();
+        }
     }
 }
+
+authenticate();
+
 
 /**
  * Start of PKCE authentication. Creates a code that is used to login a user.
@@ -158,19 +162,19 @@ async function getToken(code) {
  * @returns {Object} JSON response containing refreshed access details.
  */
 async function refreshToken() {
-        const response = await fetch(tokenEndpoint, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: new URLSearchParams({
-                client_id: clientId,
-                grant_type: 'refresh_token',
-                refresh_token: currentToken.refresh_token
-            }),
-        });
+    const response = await fetch(tokenEndpoint, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+            client_id: clientId,
+            grant_type: 'refresh_token',
+            refresh_token: currentToken.refresh_token
+        }),
+    });
 
-        return await response.json();
+    return await response.json();
 }
 
 /**
@@ -285,19 +289,12 @@ export const Spotify = {
                 });
             });
         } catch (error) {
-                // Something went wrong, delete local storage and refresh page
-                currentToken.reset();
+            // Something went wrong, delete local storage and refresh page
+            currentToken.reset();
         }
     },
 }
 
 
-// A react component to display 'DEMO' if no client ID
-export function Demo() {
-    if (!isDemo) {
-        return '';
-    }
-    return <div className='demo'>DEMO</div>;
-}
 
 

@@ -10,8 +10,9 @@ import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
 import Tracklist from '../Tracklist/Tracklist';
 import Background from '../Background/Background';
-import { Spotify, Demo, isDemo } from '../../utils/Spotify';
+import { Spotify, isDemo } from '../../utils/Spotify';
 import Modal from '../Modal/Modal';
+import Demo from '../Demo/Demo';
 import './App.css';
 
 /**
@@ -145,7 +146,7 @@ function App() {
         </div>
       </div>
       <Background numChars={50} />
-      <Demo />
+      <Demo isDemo={isDemo}/>
       <Modal title={title} message={message} handleOnModalOK={handleOnModalOK} />
     </>
   );
