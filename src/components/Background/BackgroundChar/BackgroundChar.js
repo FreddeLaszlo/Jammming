@@ -74,7 +74,7 @@ function randomBackground() {
 function Logo({width}) {
     const logos = [spotifyLogo1, spotifyLogo2];
     const logo = logos[Math.floor(Math.random() * logos.length)];
-    return <img src={logo} alt='' width={width} />;
+    return <img src={logo} alt='O' width={width} />;
 }
 
 /**
