@@ -23,7 +23,8 @@ const entities = [
  * @returns {String} - A single character from entities array.
  */
 function randomEntity() {
-    return entities[Math.floor(Math.random() * entities.length)];
+    const char =  entities[Math.floor(Math.random() * entities.length)];
+    return char === 'logo' ? <Logo /> : char;
 }
 
 // Array of CSS animations.
@@ -71,9 +72,10 @@ function randomBackground() {
  * @param {Object} {width} - width of image extracted from object.
  * @returns 
  */
-function Logo({width}) {
+function Logo() {
     const logos = [spotifyLogo1, spotifyLogo2];
     const logo = logos[Math.floor(Math.random() * logos.length)];
+    const width = Math.random() * 128 + 20;
     return <img src={logo} alt='O' width={width} />;
 }
 
@@ -88,29 +90,32 @@ export default function BackgroundChar({ id }) {
     const elemId = 'backgroundchar' + id;
 
     useEffect(() => {
-        const elem = document.getElementById(elemId);
-        const timeout = Math.floor(Math.random() * 20000 + 5000);
-        const animation = randomAnimation();
-    
-        elem.style.animationName = null;
-
-        requestAnimationFrame(() => {
-            setTimeout(() => {
-                elem.style.animationDuration = `${timeout}ms`;
-                elem.style.animationName = animation;
-            }, 0);
-        });
-    }, [style, id, elemId]);
+        handleAnimationEnd();
+        // Ignore useEffect missing dependency handleAnimationEnd warning
+        // eslint-disable-next-line
+    }, []);
 
     function handleAnimationEnd() {
+        // Stop current animation
+        const elem = document.getElementById(elemId);
+        elem.style.animationName = null; // stop animation
+
+        // Setup new animation characteristics
         const newStyle = randomBackground();
         const newChar = randomEntity(); 
-        setChar(newChar === 'logo' ? <Logo width={newStyle.fontSize} /> : newChar);
+        const timeout = Math.floor(Math.random() * 20000 + 5000);
+        const animation = randomAnimation();
+        setChar(newChar);
         setStyle(newStyle);
+        elem.style.animationDuration = `${timeout}ms`;
+
+        // Trigger animation reflow
+        void elem.offsetWidth;
+        elem.style.animationName = animation;
     }
 
     return (
-        <div className="backgroundChar" style={style} id={elemId} onAnimationEnd={handleAnimationEnd}>
+        <div className="backgroundChar" style={style} id={elemId} key={elemId} onAnimationEnd={handleAnimationEnd}>
             {char}
         </div>
 

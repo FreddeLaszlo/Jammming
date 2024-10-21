@@ -6,7 +6,10 @@ function Demo({isDemo = true}) {
     if (!isDemo) {
         return false;
     }
-    return <div className='demo'>DEMO</div>;
+    return <div className='demo'>
+            DEMO
+            <p>Click empty 'Search'<br></br>to see all items.</p>
+        </div>;
 }
 
 export default Demo;
