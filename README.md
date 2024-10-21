@@ -1,5 +1,7 @@
 # Jammming – A React JS App for Spotify Playlists
 
+Live demo can be found on [Github Pages](https://freddelaszlo.github.io/Jammming/)
+
 ## Technologies Used
 - React
 - HTML
