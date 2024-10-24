@@ -32,10 +32,6 @@
     font-size: 1.3rem;
 }
 
-.modalMessage button:focus { 
-    border: 2px solid pink;
-}
-
 .modalMessage h4 {
     margin: 0;
 }

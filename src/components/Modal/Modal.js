@@ -13,18 +13,20 @@ import './Modal.css';
  * @param {Object} - message (String), handleOnModalOK (callback function)
  * @returns HTML dialog
  */
-function Modal({ title, message, handleOnModalOK }) {
+function Modal({ showModal, title, message, handleOnModalOK }) {
 
-    // When there is a message we add keyboard handler.
+    // When the dialog is shown, add keyboard handler.
     // Return cleanup that removes the keyboard handler.
     useEffect(() => {
-        if (message.length > 0) {
+        if (showModal === true) {
+            console.log("Modal.useEffect: addEventLisdtener");
             window.addEventListener("keydown", handleKeyDown);
         }
         return () => {
+            console.log("Modal.useEffect: removeEventListener");
             window.removeEventListener("keydown", handleKeyDown);
         };
-    });
+    }, [showModal]);
 
     /**
      * Handle return, space or esc key pressed
@@ -37,7 +39,7 @@ function Modal({ title, message, handleOnModalOK }) {
         }
     }
 
-    if (message.length === 0) {
+    if (showModal === false) {
         // Return false to force unmount and run clean up code (useEffect).
         return false; 
     }

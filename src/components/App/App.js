@@ -26,6 +26,7 @@ function App() {
   const [message, setMessage] = useState(''); // For modal dialog
   const [inert, setInert] = useState(null); // For modal dialog
   const [title, setTitle] = useState(''); // For modal dialog
+  const [showModal, setShowModal] = useState(false); // For modal dialog
   const [disablePlaylistButtons, setDisablePlaylistButtons] = useState(null); // Stop button clicks whilst saving
   const [find, setFind] = useState('');
 
@@ -111,9 +112,7 @@ function App() {
       setTitle(title);
       setMessage(message);
       setInert('true');
-    } else {
-      setMessage('');
-      setInert(null);
+      setShowModal(true);
     }
   }
 
@@ -122,7 +121,9 @@ function App() {
    * Removes the dialog from screen.
    */
   function handleOnModalOK() {
-    popupModal('', '');
+    console.log("App.handleOnModalOK");
+    setShowModal(false);
+    setInert(null);
   }
 
   return (
@@ -146,8 +147,8 @@ function App() {
         </div>
       </div>
       <Background numChars={50} />
-      <Demo isDemo={isDemo}/>
-      <Modal title={title} message={message} handleOnModalOK={handleOnModalOK} />
+      <Demo isDemo={isDemo} />
+      <Modal showModal={showModal} title={title} message={message} handleOnModalOK={handleOnModalOK} />
     </>
   );
 }
