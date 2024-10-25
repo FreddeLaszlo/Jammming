@@ -1,0 +1,37 @@
+.modalBackground {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    user-select: none;
+    z-index: 200;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    display: flex;
+}
+
+.modalMessage {
+    max-width: 600px;
+    width: fit-content;
+    background-color: beige;
+    border: 1px solid black;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    margin: 0 20px;
+    box-shadow: 5px 5px 10px black;
+}
+
+
+
+.modalMessage button {
+    margin-top: 15px;
+    font-size: 1.3rem;
+}
+
+.modalMessage h4 {
+    margin: 0;
+}

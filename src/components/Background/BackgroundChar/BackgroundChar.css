@@ -1,0 +1,33 @@
+.backgroundChar {
+    position: absolute;
+    opacity: 0.3;
+    display: block;
+    text-shadow: 2px 2px 4px lightgray;
+    animation-timing-function: linear;
+    user-select: none;
+}
+
+
+@keyframes backgroundAnimation1 {
+    from {
+        translate: 0 -128px;
+        rotate: -45deg;
+    }
+
+    to {
+        rotate: 45deg;
+        translate: 0 120vh;
+    }
+}
+
+@keyframes backgroundAnimation2 {
+    from {
+        translate: 0 -128px;
+        rotate: 45deg;
+    }
+
+    to {
+        rotate: -45deg;
+        translate: 0 120vh;
+    }
+}

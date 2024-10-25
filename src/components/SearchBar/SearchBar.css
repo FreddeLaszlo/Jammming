@@ -1,0 +1,23 @@
+.searchbar {
+    padding: 10px 8px;
+    background-color: rgba(222, 222, 222, 0.788);
+    margin: 20px auto;
+    width: fit-content;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.searchbar * {
+    font-size: 1.2rem;
+    border-radius: 10px;
+    box-shadow: 4px 4px 8px;
+    border: none;
+    margin: 10px;
+    padding: 10px
+} 
+
+@media (max-width: 700px) {
+    .searchbar * {
+        font-size: 0.9rem;
+    }
+} 
